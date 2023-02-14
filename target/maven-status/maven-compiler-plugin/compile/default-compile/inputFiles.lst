@@ -1,0 +1,10 @@
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/api/Saying.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/trueApplication.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/health/TemplateHealthCheck.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/resources/HelloWorldResource.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/resources/ItemsResource.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/api/beans/ItemsEntity.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/api/response/ItemResponse.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/resources/UserResource.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/trueConfiguration.java
+/home/alessandro/ideaProjects/dwTestApp/src/main/java/dw/testApp/db/daos/ItemsDAO.java

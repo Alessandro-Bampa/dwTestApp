@@ -1,0 +1,13 @@
+logging:
+  level: INFO
+  loggers:
+    dw.testApp: DEBUG
+
+template: Hello, %s!
+defaultName: Strangersz
+
+database:
+  driverClass : org.postgresql.Driver
+  url: 'jdbc:postgresql://localhost:5432/postgres'
+  user: postgres
+  password: postgres

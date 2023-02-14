@@ -1,0 +1,11 @@
+FROM java:11-jre
+MAINTAINER Alessandro Bampa
+
+WORKDIR /var/dropwizard-rest-stub
+
+ADD target/dwTestApp-1.0-SNAPSHOT.jar /var/dropwizard-rest-stub/dropwizard-rest-stub.jar
+ADD config-docker.yml /var/dropwizard-rest-stub/config.yml
+
+EXPOSE 9000 9001
+
+ENTRYPOINT ["java", "-jar", "dwTestApp.jar", "server", "config.yml"]
