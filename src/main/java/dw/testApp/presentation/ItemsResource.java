@@ -1,4 +1,4 @@
-package dw.testApp.resources;
+package dw.testApp.presentation;
 
 import dw.testApp.api.beans.ItemsEntity;
 import dw.testApp.api.response.ItemResponse;

@@ -2,12 +2,17 @@ package dw.testApp;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mongodb.client.MongoClient;
+import configuration.DependencyInjectionConfiguration;
+import configuration.MongoDbConfiguration;
 import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import org.eclipse.jetty.util.annotation.Name;
 
+import java.util.List;
 
 
 public class trueConfiguration extends Configuration {
@@ -20,8 +25,11 @@ public class trueConfiguration extends Configuration {
 
     @Valid
     @NotNull
-    @JsonProperty
-    private DataSourceFactory database = new DataSourceFactory();
+    private DataSourceFactory postgres = new DataSourceFactory();
+
+    @Valid
+    @NotNull
+    private MongoDbConfiguration injectionConfiguration;
 
 
     @JsonProperty
@@ -46,11 +54,29 @@ public class trueConfiguration extends Configuration {
 
     @JsonProperty("database")
     public void setDataSourceFactory(DataSourceFactory factory) {
-        this.database = factory;
+        this.postgres = factory;
     }
 
     @JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
-        return database;
+        return postgres;
+    }
+
+    /*
+    @JsonProperty("mongo")
+    public void setDataSourceFactoryMongo(DataSourceFactory factory) {
+        this.mongo = factory;
+    }
+
+    @JsonProperty("mongo")
+    public DataSourceFactory getDataSourceFactoryMongo() {
+        return mongo;
+    }
+    */
+    @JsonProperty
+    public MongoDbConfiguration getInjectionConfiguration() {return injectionConfiguration;}
+
+    public void setInjectionConfiguration(MongoDbConfiguration injectionConfiguration) {
+        this.injectionConfiguration = injectionConfiguration;
     }
 }

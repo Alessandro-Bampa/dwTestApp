@@ -1,10 +1,10 @@
+dw/testApp/presentation/UserResource.class
 dw/testApp/api/response/ItemResponse.class
-dw/testApp/resources/UserResource.class
 dw/testApp/db/daos/ItemsDAO.class
 dw/testApp/health/TemplateHealthCheck.class
+dw/testApp/presentation/HelloWorldResource.class
 dw/testApp/api/Saying.class
 dw/testApp/trueConfiguration.class
 dw/testApp/trueApplication.class
 dw/testApp/api/beans/ItemsEntity.class
-dw/testApp/resources/HelloWorldResource.class
-dw/testApp/resources/ItemsResource.class
+dw/testApp/presentation/ItemsResource.class

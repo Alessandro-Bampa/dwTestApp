@@ -1,4 +1,4 @@
-package dw.testApp.resources;
+package dw.testApp.presentation;
 
 import com.codahale.metrics.annotation.Timed;
 import dw.testApp.api.Saying;

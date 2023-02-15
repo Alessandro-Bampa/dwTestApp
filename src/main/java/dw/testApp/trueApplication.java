@@ -1,10 +1,11 @@
 package dw.testApp;
 
+import configuration.DependencyInjectionBundle;
 import dw.testApp.health.TemplateHealthCheck;
-import dw.testApp.resources.HelloWorldResource;
+import dw.testApp.presentation.HelloWorldResource;
 
-import dw.testApp.resources.ItemsResource;
-import dw.testApp.resources.UserResource;
+import dw.testApp.presentation.ItemsResource;
+import dw.testApp.presentation.UserResource;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
@@ -30,7 +31,7 @@ public class trueApplication extends Application<trueConfiguration> {
 
     @Override
     public void run(final trueConfiguration configuration,
-                    final Environment environment) {
+                    final Environment environment) throws Exception {
         // TODO: implement application
         final HelloWorldResource resource = new HelloWorldResource(
                 configuration.getTemplate(),
@@ -43,10 +44,13 @@ public class trueApplication extends Application<trueConfiguration> {
         final JdbiFactory factory = new JdbiFactory();
         final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
 
-        environment.jersey().register(new UserResource(jdbi));
+        //environment.jersey().register(new UserResource(jdbi));
 
         final ItemsResource itemsResource = new ItemsResource(jdbi);
         environment.jersey().register(itemsResource);
+
+        final DependencyInjectionBundle dependencyInjectionBundle = new DependencyInjectionBundle();
+        dependencyInjectionBundle.run(configuration.getInjectionConfiguration(), environment);
     }
 
 }
