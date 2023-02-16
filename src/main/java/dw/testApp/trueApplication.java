@@ -1,19 +1,20 @@
 package dw.testApp;
 
-import configuration.DependencyInjectionBundle;
 import dw.testApp.health.TemplateHealthCheck;
 import dw.testApp.presentation.HelloWorldResource;
 
-import dw.testApp.presentation.ItemsResource;
-import dw.testApp.presentation.UserResource;
+import dw.testApp.presentation.adapter.ItemRestServiceImpl;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
 import io.dropwizard.jdbi3.JdbiFactory;
 
 import org.jdbi.v3.core.Jdbi;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
-public class trueApplication extends Application<trueConfiguration> {
+public class trueApplication extends Application<TrueConfiguration> {
 
     public static void main(final String[] args) throws Exception {
         new trueApplication().run(args);
@@ -25,12 +26,20 @@ public class trueApplication extends Application<trueConfiguration> {
     }
 
     @Override
-    public void initialize(final Bootstrap<trueConfiguration> bootstrap) {
-        // TODO: application initialization
+    public void initialize(Bootstrap<TrueConfiguration> bootstrap) {
+        bootstrap.setConfigurationSourceProvider(
+                new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
+                        new EnvironmentVariableSubstitutor(false)));
+/*
+        GuiceBundle<TrueConfiguration> guiceBundle = GuiceBundle.builder().enableAutoConfig(getClass().getPackage().getName()).modules(
+                new ConfigModule()).build();
+        bootstrap.addBundle(guiceBundle);
+
+ */
     }
 
     @Override
-    public void run(final trueConfiguration configuration,
+    public void run(final TrueConfiguration configuration,
                     final Environment environment) throws Exception {
         // TODO: implement application
         final HelloWorldResource resource = new HelloWorldResource(
@@ -44,13 +53,9 @@ public class trueApplication extends Application<trueConfiguration> {
         final JdbiFactory factory = new JdbiFactory();
         final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
 
-        //environment.jersey().register(new UserResource(jdbi));
+        final ItemRestServiceImpl itemRestService = new ItemRestServiceImpl();
+        environment.jersey().register(itemRestService);
 
-        final ItemsResource itemsResource = new ItemsResource(jdbi);
-        environment.jersey().register(itemsResource);
-
-        final DependencyInjectionBundle dependencyInjectionBundle = new DependencyInjectionBundle();
-        dependencyInjectionBundle.run(configuration.getInjectionConfiguration(), environment);
     }
 
 }
